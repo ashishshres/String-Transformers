@@ -5,8 +5,17 @@ let camelCase = document.querySelector("#camelcase");
 let pascalCase = document.querySelector("#pascalcase");
 let snakeCase = document.querySelector("#snakecase");
 let kebabCase = document.querySelector("#kebabcase");
+let outputs = document.querySelectorAll(".transformed-output");
 
-input.addEventListener("input", transformer);
+input.addEventListener("input", () => {
+  if (input.value) {
+    transformer();
+  } else {
+    outputs.forEach((output) => {
+      output.textContent = "";
+    });
+  }
+});
 
 function transformer() {
   upperCase.innerText = input.value.toUpperCase();
@@ -21,7 +30,7 @@ function toCamelCase(input) {
   let lowercaseStr = input.toLowerCase();
   console.log(lowercaseStr);
   let camelCaseStr = lowercaseStr.split(" ").map((word, i) => {
-    if (i == 0) {
+    if (i === 0) {
       return word;
     } else {
       return word[0].toUpperCase() + word.slice(1, word.length);
